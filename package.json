@@ -1,0 +1,44 @@
+{
+  "name": "mws-restaurant-stage-1",
+  "version": "1.0.0",
+  "description": "Node is being initialized for linting purposes",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "devDependencies": {
+    "eslint": "^5.6.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-promise": "^4.0.1"
+  },
+  "scripts": {
+    "lint": "eslint --fix .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sherwino/wino-mws-restaurants.git"
+  },
+  "keywords": [
+    "MWS",
+    "Udacity",
+    "Grow",
+    "With",
+    "Google",
+    "Service",
+    "Workers",
+    "HTML",
+    "CSS",
+    "JS",
+    "Src",
+    "Set"
+  ],
+  "author": "sherwino",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sherwino/wino-mws-restaurants/issues"
+  },
+  "homepage": "https://github.com/sherwino/wino-mws-restaurants#readme"
+}
