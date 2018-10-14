@@ -10,7 +10,6 @@ var markers = []
  * Fetch neighborhoods and cuisines as soon as the page is loaded.
  */
 document.addEventListener('DOMContentLoaded', (event) => {
-  // initMap();
   fetchNeighborhoods();
   fetchCuisines();
 });
@@ -181,6 +180,10 @@ createRestaurantHTML = (restaurant) => {
   more.innerHTML = 'View Details';
   more.type = 'Button'
   more.href = url;
+  li.addEventListener('click', (event) => {
+    console.log('clicked? Go to -->', url)
+    window.location = url;
+  });
   
   li.append(more)
 
