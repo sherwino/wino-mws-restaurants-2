@@ -18,6 +18,14 @@ window.initMap = () => {
       fillBreadcrumb();
       DBHelper.mapMarkerForRestaurant(self.restaurant, self.map);
     }
+  // Google map makes a bunch of links that steal focus of a screen reader
+  // Going to add an event that sets attribute to all of these items
+  const mapEl = document.getElementById('detail-map');
+  mapEl.addEventListener("keydown", () => {
+  const mapLinks = mapEl.querySelectorAll('a');
+  mapLinks.forEach(link => link.setAttribute('tabindex', '-1'));
+});
+  
   });
 }
 

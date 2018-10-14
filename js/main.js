@@ -84,14 +84,18 @@ window.initMap = () => {
     scrollwheel: false
   });
   updateRestaurants();
+
+// Google map makes a bunch of links that steal focus of a screen reader
+// Going to add an event that sets attribute to all of these items
+const mapEl = document.getElementById('map');
+mapEl.addEventListener("keydown", () => {
+  const mapLinks = mapEl.querySelectorAll('a');
+  mapLinks.forEach(link => link.setAttribute('tabindex', '-1'));
+});
   
-  // Google map makes a bunch of links that steal focus of a screen reader
-  // Going to add an event that sets attribute to all of these items
-  google.maps.event.addListener(self.map, "tilesloaded", () => {
-    const hrefs = document.querySelectorAll('#map a');
-    hrefs.forEach(href => href.setAttribute('tabindex', '-1'));
-  });
 }
+
+
 
 /**
  * Update page and map for current restaurants.
@@ -153,7 +157,7 @@ createRestaurantHTML = (restaurant) => {
   const image = document.createElement('img');
   image.className = 'restaurant-img';
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
-  image.alt = `${restaurant.name} promotional image showing food, or location.`;
+  image.alt = `${restaurant.name}, promotional image.`;
   li.append(image);
 
   const name = document.createElement('h2');
@@ -179,11 +183,17 @@ createRestaurantHTML = (restaurant) => {
   more.className = 'view-details-btn';
   more.innerHTML = 'View Details';
   more.type = 'Button'
+  more.setAttribute('role', 'button');
+  more.setAttribute('aria-label', `View more details about ${restaurant.name}`)
   more.href = url;
   li.addEventListener('click', (event) => {
-    console.log('clicked? Go to -->', url)
     window.location = url;
   });
+
+  li.setAttribute('aria-label', 
+  `${restaurant.name} is an ${restaurant.cuisine_type} restaurant in ${restaurant.neighborhood}`
+  )
+  li.setAttribute('tabindex', '0');
   
   li.append(more)
 
