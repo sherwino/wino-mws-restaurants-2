@@ -7,8 +7,7 @@ body {
 /* ====================== MAIN CONTAINER / GRID ====================== */
 
 .inside {
-  width: 1fr;
-  transition: all 0.5s ease-in;
+  width: 100%;
 }
 
 #maincontent {
