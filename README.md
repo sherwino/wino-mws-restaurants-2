@@ -38,7 +38,7 @@ While the project is a work in progress below are some screenshots of some of th
 
 *Example of Media Queries on Site, from 4 Columns, to 1*
 
-![Example of Media Queries on Site, from 4 Columns, to 1](https://i.gyazo.com/f66c981f9211197f5b0dca59b27f866e.gif)
+[Example of Media Queries on Site, from 4 Columns, to 1](https://i.gyazo.com/f66c981f9211197f5b0dca59b27f866e.gif)
 
 *Example of Media Queries on Site, narrow views*
 
