@@ -1,33 +1,41 @@
-const { serviceWorker } = window.navigator;
+const { serviceWorker } = navigator;
 
-if ('serviceWorker' in navigator) {
-    serviceWorker.register('/sw.js', {
-        scope: './',
-    });
-}
-//     .then((registration) => {
-//         console.log('SW registration successful at scope', registration.scope);
-//         let sw;
+const registerServiceWorker = () => {
+    if ('serviceWorker' in navigator) {
+        serviceWorker.register('/sw.js', 
+            { scope: './' }
+        ).then((registration) => {
+            console.info('Service worker registered', registration.scope);
+            const sw = {};
+    
+            if (registration.installing) {
+                sw.status = registration.installing;
+                console.info('Service worker installing');
+            }
+    
+            if (registration.waiting) {
+                sw.status = registration.waiting;
+                console.warn('Service worker waiting');
+            }
+    
+            if (registration.active) {
+                sw.status = registration.active;
+                console.info('Service worker active');
+            }
+    
+            if (sw.status) {
+                console.log('Service worker state:', sw.status.state);
+                sw.status.addEventListener('statechange', (e) => {
+                    console.log('Service worker state:', e.target.state)
+                });
+            }
+        }).catch(() => {
+            console.error('Service worker installation failed');
+        })
+    };
+};
 
-//         if (registration.installing) {
-//             sw = registration.installing;
-//             console.log('SW installing!');
-//         } else if (registration.waiting) {
-//             sw = registration.waiting;
-//             console.log('SW installed and waiting!');
-//         } else if (registration.active) {
-//             sw = registration.active;
-//             console.log('SW active!');
-//         }
-
-//         if (sw) {
-//             console.log(sw.state);
-//             sw.addEventListener('statechange', (e) => {
-//                 console.log(e.target.state);
-//             });
-//         }
-//     }).catch(() => {
-//         console.log('SW Registration failed!');
-//     });
-// // });
-// // }
+document.addEventListener('DOMContentLoaded', (event) => {
+    registerServiceWorker();
+    
+  });
