@@ -1,7 +1,9 @@
+'use-strict';
+
 let restaurants,
   neighborhoods,
   cuisines
-var map
+var newMap
 var markers = []
 
 /**
@@ -35,6 +37,8 @@ fillNeighborhoodsHTML = (neighborhoods = self.neighborhoods) => {
     const option = document.createElement('option');
     option.innerHTML = neighborhood;
     option.value = neighborhood;
+    // Aria role needs to be dynamically added too
+    option.setAttribute('role', 'option'); 
     select.append(option);
   });
 }
@@ -63,13 +67,12 @@ fillCuisinesHTML = (cuisines = self.cuisines) => {
     const option = document.createElement('option');
     option.innerHTML = cuisine;
     option.value = cuisine;
+        // Aria role needs to be dynamically added too
+        option.setAttribute('role', 'option'); 
     select.append(option);
   });
 }
 
-/**
- * Initialize Google map, called from HTML.
- */
 window.initMap = () => {
   let loc = {
     lat: 40.722216,
@@ -81,7 +84,18 @@ window.initMap = () => {
     scrollwheel: false
   });
   updateRestaurants();
+
+// Google map makes a bunch of links that steal focus of a screen reader
+// Going to add an event that sets attribute to all of these items
+const mapEl = document.getElementById('map');
+mapEl.addEventListener("keydown", () => {
+  const mapLinks = mapEl.querySelectorAll('a');
+  mapLinks.forEach(link => link.setAttribute('tabindex', '-1'));
+});
+  
 }
+
+
 
 /**
  * Update page and map for current restaurants.
@@ -116,8 +130,10 @@ resetRestaurants = (restaurants) => {
   ul.innerHTML = '';
 
   // Remove all map markers
-  self.markers.forEach(m => m.setMap(null));
-  self.markers = [];
+  if (self.markers) {
+    self.markers.forEach(marker => marker.setMap(null));
+    self.markers = [];
+  }
   self.restaurants = restaurants;
 }
 
@@ -141,9 +157,10 @@ createRestaurantHTML = (restaurant) => {
   const image = document.createElement('img');
   image.className = 'restaurant-img';
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
+  image.alt = `${restaurant.name}, promotional image.`;
   li.append(image);
 
-  const name = document.createElement('h1');
+  const name = document.createElement('h2');
   name.innerHTML = restaurant.name;
   li.append(name);
 
@@ -152,20 +169,37 @@ createRestaurantHTML = (restaurant) => {
   li.append(neighborhood);
 
   const address = document.createElement('p');
-  address.innerHTML = restaurant.address;
-  li.append(address);
-
+  const addressArray = restaurant.address.split(',')
+  const cityStateZip = document.createElement('p');
   const more = document.createElement('a');
+  const url = DBHelper.urlForRestaurant(restaurant);
+  
+  address.innerHTML = addressArray[0];
+  cityStateZip.innerHTML = `${addressArray[1]}, ${addressArray[2]}`;
+
+  li.append(address);
+  li.append(cityStateZip);
+
+  more.className = 'view-details-btn';
   more.innerHTML = 'View Details';
-  more.href = DBHelper.urlForRestaurant(restaurant);
+  more.type = 'Button'
+  more.setAttribute('role', 'button');
+  more.setAttribute('aria-label', `View more details about ${restaurant.name}`)
+  more.href = url;
+  li.addEventListener('click', (event) => {
+    window.location = url;
+  });
+
+  li.setAttribute('aria-label', 
+  `${restaurant.name} is an ${restaurant.cuisine_type} restaurant in ${restaurant.neighborhood}`
+  )
+  li.setAttribute('tabindex', '0');
+  
   li.append(more)
 
   return li
 }
 
-/**
- * Add markers for current restaurants to the map.
- */
 addMarkersToMap = (restaurants = self.restaurants) => {
   restaurants.forEach(restaurant => {
     // Add marker to the map
@@ -176,3 +210,4 @@ addMarkersToMap = (restaurants = self.restaurants) => {
     self.markers.push(marker);
   });
 }
+

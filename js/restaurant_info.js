@@ -1,15 +1,16 @@
-let restaurant;
+'use-strict';
+let restaurant = '';
 var map;
 
 /**
- * Initialize Google map, called from HTML.
+ * Initialize map if you look at the script imported google runs init
  */
 window.initMap = () => {
   fetchRestaurantFromURL((error, restaurant) => {
     if (error) { // Got an error!
       console.error(error);
     } else {
-      self.map = new google.maps.Map(document.getElementById('map'), {
+      self.map = new google.maps.Map(document.getElementById('detail-map'), {
         zoom: 16,
         center: restaurant.latlng,
         scrollwheel: false
@@ -17,6 +18,14 @@ window.initMap = () => {
       fillBreadcrumb();
       DBHelper.mapMarkerForRestaurant(self.restaurant, self.map);
     }
+  // Google map makes a bunch of links that steal focus of a screen reader
+  // Going to add an event that sets attribute to all of these items
+  const mapEl = document.getElementById('detail-map');
+  mapEl.addEventListener("keydown", () => {
+  const mapLinks = mapEl.querySelectorAll('a');
+  mapLinks.forEach(link => link.setAttribute('tabindex', '-1'));
+});
+  
   });
 }
 
@@ -85,7 +94,8 @@ fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => 
     const time = document.createElement('td');
     time.innerHTML = operatingHours[key];
     row.appendChild(time);
-
+    hours.setAttribute('tabindex', '0');
+    hours.setAttribute('aria-label', `Hours of operation for ${self.restaurant.name}`)
     hours.appendChild(row);
   }
 }
@@ -109,6 +119,9 @@ fillReviewsHTML = (reviews = self.restaurant.reviews) => {
   reviews.forEach(review => {
     ul.appendChild(createReviewHTML(review));
   });
+
+  ul.setAttribute('tabindex', '0');
+  ul.setAttribute('aria-label', `List of restaurant reviews for ${self.restaurant.name}`);
   container.appendChild(ul);
 }
 
