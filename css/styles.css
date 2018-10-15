@@ -95,6 +95,11 @@ nav h1 a {
   background-color: #ccc;
 }
 /* ====================== Restaurant Filtering ====================== */
+.filter-label {
+  position: absolute;
+  left: -400px;
+}
+
 .filter-options {
   width: 100%;
   height: 50px;
