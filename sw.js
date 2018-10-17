@@ -1,13 +1,13 @@
 const staticCacheName = 'reviews-v1';
 const cacheItems = [
     '/',
-    'css/mediaqueries.css',
-    'css/restaurants.css',
-    'css/styles.css',
-    'data/restaurants.json',
-    'js/dbhelper.js',
-    'js/main.js',
-    'js/restaurant_info.js',
+    './public/css/mediaqueries.css',
+    './public/css/restaurants.css',
+    './public/css/styles.css',
+    './public/data/restaurants.json',
+    './public/js/dbhelper.js',
+    './public/js/main.js',
+    './public/js/restaurant_info.js',
 ];
 
 // Listen for when worker is installed, then cache
