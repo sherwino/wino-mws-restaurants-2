@@ -75,3 +75,9 @@ typings/
 
 # IDE Files
 .vscode/
+
+# Ignore but maybe I shouldn't because we want to use github pages
+dist/
+
+# Ignore secrets
+src/js/secret.js
