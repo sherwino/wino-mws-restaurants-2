@@ -7,23 +7,23 @@ export default class DBHelper {
 
   /**
    * Database URL.
-   * Change this to restaurants.json file location on your server.
+   * Reserved for when the API is hosted elsewhere.
    */
-  static get DATABASE_URL() {
-    const data = '/public/data/restaurants.json';
-    const github = `https://sherwino.github.io/wino-mws-restaurants/${data}`;
-    const port = 8000
+  // static get DATABASE_URL() {
+  //   const data = '/public/data/restaurants.json';
+  //   const github = `https://sherwino.github.io/wino-mws-restaurants/${data}`;
+  //   const port = 8000
 
-    const isLocalHost = () => {
-      if (window.location.hostname.includes('localhost')) {
-        return `http://localhost:${port}/${data}`;
-      }
-    };
+  //   const isLocalHost = () => {
+  //     if (window.location.hostname.includes('localhost')) {
+  //       return `http://localhost:${port}/${data}`;
+  //     }
+  //   };
 
-    const url = isLocalHost() || github;
+  //   const url = isLocalHost() || github;
 
-    return url;
-  }
+  //   return url;
+  // }
 
   /**
    * API URL
