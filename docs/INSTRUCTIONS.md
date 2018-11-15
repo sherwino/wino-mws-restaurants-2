@@ -8,15 +8,15 @@ Use server data instead of local memory In the first version of the application,
 
 Use IndexedDB to cache JSON responses In order to maintain offline use with the development server you will need to update the service worker to store the JSON received by your requests using the IndexedDB API. As with [Stage One](https://github.com/sherwino/wino-mws-restaurants), any page that has been visited by the user should be available offline, with data pulled from the shell database.
 
-Meet the minimum performance requirements Once you have your app working with the server and working in offline mode, you’ll need to measure your site performance using Lighthouse.
+Meet the minimum performance requirements Once you have your app working with the server and working in offline mode, you’ll need to measure your site performance using [Lighthouse](https://developers.google.com/web/tools/lighthouse/).
 
-Lighthouse measures performance in four areas, but your review will focus on three:
+[Lighthouse](https://developers.google.com/web/tools/lighthouse/) measures performance in four areas, but your review will focus on three:
 
     Progressive Web App score should be at 90 or better.
     Performance score should be at 70 or better.
     Accessibility score should be at 90 or better.
 
-You can audit your site's performance with Lighthouse by using the Audit tab of Chrome Dev Tools.
+You can audit your site's performance with [Lighthouse](https://developers.google.com/web/tools/lighthouse/) by using the Audit tab of Chrome Dev Tools.
 
 ## Before Submitting
 
