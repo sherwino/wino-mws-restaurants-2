@@ -1,7 +1,7 @@
 'use-strict';
 
 import DBHelper from './dbhelper';
-// import './register';
+import './register';
 import './browser';
 
 
