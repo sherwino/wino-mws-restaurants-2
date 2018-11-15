@@ -10,13 +10,13 @@ module.exports = function(grunt) {
                   name: "large",
                   width: 1024,
                 //   suffix: "-large",
-                  quality: 80
+                  quality: 60
                 },
                 {
                   name: "medium",
                   width: 800,
                 //   suffix: "-medium",
-                  quality: 80
+                  quality: 60
                 },
                 {
                   name: "small",
@@ -29,9 +29,9 @@ module.exports = function(grunt) {
             files: [
               {
                 expand: true,
-                cwd: "./src/img",
+                cwd: "./src/original",
                 src: ["**.{jpg,gif,png}"],
-                dest: "./src/img/"
+                dest: "./src/img"
               }
             ]
         }
