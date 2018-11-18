@@ -21,7 +21,7 @@ For up to date instructions go to [docs](./docs/INSTRUCTIONS.md)
 
 1. Then navigate to the API by going to the `server` folder. ```cd server```, then run npm install there too ```npm install```.
 
-1. When the node modules are ready in the server, run ```npm run start``` to get the server going then navigate back to the main folder ```cd ../``` and ```npm run start``` the gulp server. This will run grunt to process the images, and then gulp's browser sync.
+1. When the node modules are ready in the server, run ```npm run dev``` to get the server going then navigate back to the main folder ```cd ../``` and ```npm run start``` the gulp server. This will run grunt to process the images, and then gulp's browser sync.
 
 
 ### Hosted Version of the Site

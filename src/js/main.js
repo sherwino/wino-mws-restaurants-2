@@ -120,6 +120,13 @@ mapEl.addEventListener("keydown", () => {
   const mapLinks = mapEl.querySelectorAll('a');
   mapLinks.forEach(link => link.setAttribute('tabindex', '-1'));
 });
+
+// Google maps is ruining my accessibility score, the image tiles have no alt tags.
+// At the moment this is not a valid solution, keeping it commented here for future builds.
+// mapEl.addEventListener('tilesloaded', () => {
+//   const mapImgs = mapEl.querySelectorAll('img');
+//   mapImgs.forEach(image => image.setAttribute('alt', 'Google Maps Tile'));
+// });
   
 }
 

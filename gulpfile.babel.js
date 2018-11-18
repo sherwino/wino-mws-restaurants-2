@@ -13,6 +13,7 @@ import log from 'fancy-log';
 import mergeStream from 'merge-stream';
 import sourcemaps from 'gulp-sourcemaps';
 import c from 'ansi-colors';
+import http2 from 'http2';
 
 const browserSync = require('browser-sync').create();
 
@@ -97,7 +98,9 @@ gulp.task('sync', ['build'], function() {
     port: 8000,
     server: {
       baseDir: './dist'
-    }
+    },
+    // httpModule: 'http2',
+    // https: true
   });
 
   // gulp.watch(paths.responsive.src, ['responsive:images']).on('change', browserSync.reload);
