@@ -40,8 +40,9 @@
   },
   "scripts": {
     "lint": "eslint --fix .",
+    "client": "grunt && gulp sync",
+    "server": "cd server && node server",
     "static": "cd src && python -m SimpleHTTPServer 8000",
-    "dev": "grunt && gulp sync",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
